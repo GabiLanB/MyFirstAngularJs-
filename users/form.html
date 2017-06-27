@@ -1,0 +1,40 @@
+<h3 class="text-left">{{usersCtrl.textAddList}}</h3>
+			<form name="contactForm" ng-submit="usersCtrl.submit()" novalidate>
+                
+                <input type="text" name="newName" placeholder="Name" ng-minlength="2" ng-model="usersCtrl.newName" ng-required="true"/>
+                <span ng-show="contactForm.newName.$touched && contactForm.newName.$invalid">Enter a valid Name</span>
+                <span ng-show="contactForm.newName.$dirty && contactForm.newName.$error.minlength">Minimum length required is 2</span>
+                <span ng-show="contactForm.newName.$dirty && contactForm.newName.$error.required">This is a required field</span>
+                <br/>
+                
+                <input type="text" name="newSecondName" placeholder="Second Name" ng-minlength="2" ng-model="usersCtrl.newLastName" ng-required="true"/>
+                <span ng-show="contactForm.newSecondName.$touched && contactForm.newSecondName.$invalid">Enter a valid Second Name</span>
+                <span ng-show="contactForm.newSecondName.$dirty && contactForm.newSecondName.$error.minlength">Minimum length required is 2</span>
+                <span ng-show="contactForm.newSecondName.$dirty && contactForm.newSecondName.$error.required">This is a required field</span>
+                <br/>
+                
+                <input type="text" name="newAge" placeholder="Age" ng-model="usersCtrl.newAge" ng-maxlength="2" ng-pattern="onlyNumbers" ng-required="true"/>
+                <span ng-show="contactForm.newAge.$touched && contact.newAge.$invalid">Enter a valid Age</span>
+                <span ng-show="contactForm.newAge.$dirty && contactForm.newAge.$error.maxlength">You have more than 99 years ???</span>
+                <span ng-show="contactForm.newAge.$dirty && contactForm.newAge.$error.required">This is a required field</span>
+                <br>
+                
+                <input type="text" name="newPhone" placeholder="Phone" ng-minlength="10" ng-maxlength="10" ng-model="usersCtrl.newPhone" ng-pattern="onlyNumbers" ng-required="true"/>
+                <span ng-show="contactForm.newPhone.$touched && contactForm.newPhone.$invalid">Enter a valid Phone Number</span>
+                <span ng-show="contactForm.newPhone.$dirty && contactForm.newPhone.$error.maxlength">You must have 10 digits</span>
+                <span ng-show="contactForm.newPhone.$dirty && contactForm.newPhone.$error.required">This is a required field</span>
+                <br>
+                
+                <input type="text" name="newEmail" placeholder="E-mail" ng-model="usersCtrl.newEmail" ng-required="true"/>
+                <span ng-show="contactForm.newEmail.$touched && contactForm.newEmail.$invalid">Enter a valid E-mail</span>
+                <span ng-show="contactForm.newEmail.$dirty && contactForm.newEmail.$error.required">This is a required field</span>
+                <br>
+                
+                <label>Gender: </label>
+                <select ng-model="usersCtrl.newGender" name="usersCtrl.newGender" required>Select
+					<option ng-repeat="x in usersCtrl.gender" value="{{x}}">{{x}}</option>
+				</select>
+                <br><!--ng-disabled="contactForm.$invalid"  -->
+                
+                <input type="submit" class="btn btn-sm-primary" value="submit"/>
+            </form>

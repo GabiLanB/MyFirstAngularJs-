@@ -1,0 +1,20 @@
+[
+    {   
+        "active" : false,
+        "newName":"Ther",
+        "newLastName":"Eis",
+        "newAge":"32",
+        "newPhone":"077429252917",
+        "newEmail":"teis0@mit.edu",
+        "newGender":"Female"
+    },
+    {   
+        "active" : false,
+        "newName":"Ros",
+        "newLastName":"Scan",
+        "newAge":"25",
+        "newPhone":"078158841955",
+        "newEmail":"rsc@chro.com",
+        "newGender":"Female"
+    }
+]
