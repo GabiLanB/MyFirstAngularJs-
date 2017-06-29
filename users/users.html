@@ -13,15 +13,15 @@
 				<theader>
 					<td ng-repeat="head in usersCtrl.table">{{head}}</td>
 				</theader>
-				<tr ng-repeat="user in usersCtrl.contacts " item="item"><!-- | orderBy:'newName' -->
-					<td class="text-center"><input type="checkbox" ng-value="usersCtrl.active" ng-click="usersCtrl.active = !usersCtrl.active"></td>
+				<tr ng-repeat="user in usersCtrl.contacts"><!--  -->
+					<td class="text-center"><input type="checkbox" ng-click="usersCtrl.changeActive($index)"></td>
 					<td>{{user.newName}}</td>
 					<td>{{user.newLastName}}</td>
 					<td>{{user.newAge}}</td>
                     <td>{{user.newPhone}}</td>
 					<td>{{user.newEmail}}</td>
 					<td>{{user.newGender}}</td>
-					<td><button class="btn btn-danger btn-sm" ng-click="usersCtrl.deleteContact($index,1)">Delete</button>
+					<td><button class="btn btn-danger btn-sm" ng-click="usersCtrl.deleteContact($index)">Delete</button>
 						<button class="btn btn-info btn-sm" ng-click="usersCtrl.editContact($index, $index+1)">Edit</button></td>
 				</tr>
 			</table>

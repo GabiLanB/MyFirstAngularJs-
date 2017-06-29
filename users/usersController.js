@@ -13,9 +13,11 @@ angular
             usersCtrl.onlyNumbers = /^\d+$/; // Use this for input text to accept only numbers
             usersCtrl.contactsBefore = myData;
             
-            usersCtrl.$storage = $localStorage.$default({
-                contactsList: usersCtrl.contactsBefore.data
-            });
+            if(!$localStorage.contactsList){
+                usersCtrl.$storage = $localStorage.$default({
+                    contactsList: usersCtrl.contactsBefore.data
+                });
+            }
             usersCtrl.contacts = $localStorage.contactsList;
 
             usersCtrl.clearForm = function(){
@@ -28,9 +30,8 @@ angular
             }
             // Submit new contact with values from the form fields, then reset values of the fields
             usersCtrl.submit = function() {  
-                //console.log("Before localStoreUpdate: ",usersCtrl.contacts);
                 var newContact = {
-                    "active" : false,
+                    "active" : "",
                     "newName" : usersCtrl.newName,
                     "newLastName" : usersCtrl.newLastName,
                     "newAge" : usersCtrl.newAge,
@@ -38,20 +39,24 @@ angular
                     "newEmail" : usersCtrl.newEmail,
                     "newGender" : usersCtrl.newGender
                 };
-                $localStorage.contactsList.push(newContact); // push the new contact to the localStore
-                //console.log("After localStoreUpdate: ",usersCtrl.contacts);
                 usersCtrl.clearForm();
+                $localStorage.contactsList.push(newContact); // push the new contact to the localStore
             };
+            
             usersCtrl.clearAll = function(){
                 delete $localStorage.contactsList;
                 usersCtrl.contacts = $localStorage.contactsList;
             }
             usersCtrl.populate = function(){
+                if($localStorage.contactsList){
+                    $localStorage.contactsList = usersCtrl.contacts
+                } else {
                    $localStorage.contactsList = usersCtrl.contactsBefore.data;
+                }
                     usersCtrl.contacts = $localStorage.contactsList;
             }
-            usersCtrl.deleteContact = function(a,b){
-                $localStorage.contactsList.splice(a,b);
+            usersCtrl.deleteContact = function(a){
+                $localStorage.contactsList.splice(a,1);
             }
             usersCtrl.editContact = function(a,b){
                 var contactForEdit = $localStorage.contactsList.slice(a,b); /*It will be save at the end of the list - for now :) */
@@ -64,5 +69,13 @@ angular
                    $localStorage.contactsList.splice(a,b);
                    usersCtrl.contacts = $localStorage.contactsList;
             }    
-
+             usersCtrl.changeActive = function(a){
+                 usersCtrl.contacts = $localStorage.contactsList;
+                 if(usersCtrl.contacts[a].active === ""){
+                     usersCtrl.contacts[a].active = true;
+                 } else {
+                     usersCtrl.contacts[a].active = !usersCtrl.contacts[a].active;
+                 }  
+                 $localStorage.contactsList = usersCtrl.contacts;
+             }
         }]);
